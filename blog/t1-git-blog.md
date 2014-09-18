@@ -10,9 +10,3 @@ Git is software that makes version control easy. It runs in the background of an
 -allows you to save ("commit") those changes along with a small message where you describe what changes you have made. Git then keeps a log of your commits (changes), and you can go back and see the code as it was before and after the various changes you made.
 
 GitHub is another useful tool for programmers, especially for teams of developers. Storing your code on GitHub allows you to collaborate with people remotely, so you can theoretically work on a project with a remote team all around the world, so long as they have Internet access. While git lives locally on your computer, and is therefore useful for working on your local disk, GitHub lives on the cloud, and works in tandem with git to push your code on to GitHub, enabling other team members to see your code, and enabling *you* to make changes to the master copy of the project. GitHub also provides peace of mind, knowing that your code is stored on a remote and very reliable server; it basically acts like a backup of your code.
-
-Paragraph 2
-
-Paragraph 3
-
-Add as many paragraphs as you want!!!
