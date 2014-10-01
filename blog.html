@@ -18,6 +18,7 @@
         <li><a href="#1">Meta-DBC</a></li>
         <li><a href="#2">Version Control</a></li>
         <li><a href="#3">CSS Subtleties</a></li>
+        <li><a href ="4">Arrays and Hashes</a></li>
       </ul>
     </div>
     <div id="content">
@@ -55,11 +56,47 @@ After having immersed myself in the world of HTML and CSS through creating a ful
 Now, what's the difference between padding, margins, and borders? First, let me explain padding and margins, as they are the most closely-related and confusable of the three. The margin of a div determines how much space the div has relative to other divs and the confines of the web page. If you set a div with all four margins set to 0, it will exist flush against other divs or the edges of the web page. There will be no breathing room. So the margin determines the space outside of the div itself relative to other elements of the web page. <br><br>The padding, on the other hand, is more inward-looking. It determines how close the div's content can get to the div's end. If you set all four sides to padding 0, the content will extend right up flush against the outer walls of the div. If you give the content more padding, it will stay away from the outer walls. You can compare the margin vs. padding issue to government, as margin is like foreign policy (how divs interact with the outside world), and padding is like domestic policy (how divs treat what's inside of them).<br><br> Finally, the border is simply that: the outermost part of the div. The border doesn't really determine anything about the div's relationship with other divs (margin) or its own inner content (padding). Rather, it is an almost purely stylistic feature. You can style the border in many ways, from a simple black solid line, to a dotted line, to even 3-D designs. Borders adds some character to the website and help compartmentalize the content. The one trick with the border is that if you make very large borders, they actually protrude outside of the div's territory (imagine an extremely thick border fence around a country that cuts into its neighboring country's territory). The programmer has to watch out for this, and sometimes has to compensate for large borders by changing around margins so that the border doesn't interfere with other content. Other than this case, borders don't really influence relationships between divs, and certainly not relationships between divs and their content. <br><br>
 
 So there you have it! I hope I helped clarify some confusion regarding these topics!
-      <br> <br> <br></span>
+      <br> <br></span>
 
+      <a name="4"><span id="blogTitle">Arrays and Hashes: </span></a>
+      <span id="blogSubTitle">One is Silver and the Other Gold</span>
+      <span id="date">September 30, 2014</span>
+      <span class="post">
+
+Now almost a third of the way through Phase 0 of Dev Bootcamp, we've finally moved on from git, HTML, and CSS to the true heart and soul of programming: scripting -- the part that actually makes your web site do stuff rather than just display it. For the first blog topic, we'll discuss arrays and hashes, which are two ways of storing data. Arrays and hashes are each their own classes in the Ruby programming language (the one we'll focus on at DBC), meaning they come with their own set of rules that govern how they can be used, and methods than can manipulate the data within them. First let's talk about arrays, since they're simpler, and understanding hashes is easier once you understand arrays. <br><br>
+An array is a series of elements grouped and stored together, separated by commas. They are encapsulated by a pair of brackets on both ends of the series of elements. The elements can be of various types, including strings, numbers, symbols, etc, such as the example below illustrates. <br> <br>
+
+<img src="images/array.png"/>
+<br><br>
+Yes, you actually can store an array inside of an array! In addition to the element itself, the array knows where the element is in the array, something called the array index. The index begins at zero, so the first element of the array can be called like so:
+<br><br>
+<img src="images/array_index.png"/>
+<br><br>
+
+How would you call the second element of the array within the parent array?
+<br><br>
+<img src="images/array_doubleindex.png"/>
+<br><br>
+
+Good. Now that we have an understanding of arrays, we can delve into the world of hashes. Hashes are similar to arrays in that they are also a means of storing a series of elements, but they don't just stop there. Hashes store relationships between its elements in what are called key-value pairs. Whereas an array could store a list of cities:
+<br><br>
+<img src="images/city_array.png"/>
+<br><br>
+the hash could store them AND tell you their populations (or whatever corresponding piece of data):
+<br><br>
+<img src="images/city_hash.png"/>
+<br><br>
+
+where the city names are the "keys" and the populations are the "values". You can access a key's corresponding value like so:
+<br><br>
+<img scr="images/hash_key.png"/>
+<br><br>
+
+As you can see, hashes allow for relationships between values, in comparison with arrays which just list them in a series. Both are incredibly useful and are fundamental to just about any large-scale project. <br><br><br>
+</span>
     </div>
     <div id="footer">
-      &copy;2014, All Rights Reserved
+      Liorr Yehuda Morrison &copy;2014, All Rights Reserved
       <span id="sitemap">
         <a href ="index.html">Home</a>
         <a href="about.html">About</a>
