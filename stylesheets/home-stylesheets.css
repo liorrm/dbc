@@ -207,3 +207,11 @@ ul {
   padding-left: 25px;
   padding-right: 0px;
 }
+
+ul :hover {
+  box-shadow: 5px 5px 5px rgba(50,50,50,0.6);
+}
+
+li :hover{
+  box-shadow: 5px 5px 5px rgba(50,50,50,0.6);
+}
