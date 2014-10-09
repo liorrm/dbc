@@ -208,10 +208,9 @@ ul {
   padding-right: 0px;
 }
 
-/*ul :hover {
-  box-shadow: 5px 5px 5px rgba(50,50,50,0.6);
-}*/
 
 li :hover{
-  box-shadow: 5px 5px 5px rgba(50,50,50,0.6);
+  border-bottom-style: solid;
+  border-bottom-color: rgb(50, 50, 50);
+  border-bottom-width: 2px;
 }
