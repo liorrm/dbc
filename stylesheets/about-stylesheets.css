@@ -65,6 +65,10 @@ body {
   font-weight: bold;
 }
 
+#sidebar img:hover {
+  box-shadow: 5px 5px 5px rgba(50,50,50,0.6);
+}
+
 #header {
   background-color: rgb(50, 50, 50);
   height: 10%;
