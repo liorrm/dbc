@@ -63,6 +63,11 @@ body {
 
 #sidebar a:hover {
   font-weight: bold;
+  box-shadow: 5px 5px 5px rgba(50,50,50,0.6);
+}
+
+#sidebar img:hover {
+  box-shadow: 5px 5px 5px rgba(50,50,50,0.6);
 }
 
 #header {
@@ -132,19 +137,6 @@ body {
   border-color: rgb(240,240,240)
 }
 
-/*}
-#blog:hover {
-  border-color: rgb(240,240,240);
-}
-
-#about:hover {
-  border-color: rgb(240,240,240);
-}
-
-#projects:hover {
-  border-color: rgb(240,240,240);
-}
-*/
 #content {
   padding: 2% 3% 5% 3%;
   border-width: 2px;
