@@ -61,11 +61,6 @@ body {
   text-decoration: none;
 }
 
-#sidebar a:hover {
-  font-weight: bold;
-  box-shadow: 5px 5px 5px rgba(50,50,50,0.6);
-}
-
 #sidebar img:hover {
   box-shadow: 5px 5px 5px rgba(50,50,50,0.6);
 }
@@ -206,11 +201,4 @@ ul {
   text-align: inherit;
   padding-left: 25px;
   padding-right: 0px;
-}
-
-
-li :hover{
-  border-bottom-style: solid;
-  border-bottom-color: rgb(50, 50, 50);
-  border-bottom-width: 2px;
 }
