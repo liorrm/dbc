@@ -63,6 +63,15 @@ body {
 
 #sidebar img:hover {
   box-shadow: 5px 5px 5px rgba(50,50,50,0.6);
+  border-radius: 11px;
+}
+
+#github {
+  border-radius: 50% !important;
+}
+
+#gmail {
+  border-radius: 2px !important;
 }
 
 #header {
