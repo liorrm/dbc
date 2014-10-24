@@ -23,6 +23,7 @@
         <li><a href="#7">Tech Issues</a></li>
         <li><a href="#8">Meta-Learning</a></li>
         <li><a href="#9">Ruby Classes</a></li>
+        <li><a href="#10">Variable Scope</a></li>
       </ul>
     </div>
     <div id="content">
@@ -234,6 +235,187 @@ Now that we've initialized it, Liorr is an instance of the class Person. In the 
 <br><br>
 
 Classes are defined by their state and behavior. All of these characteristics -- age, sex, height, religion, etc. -- give the class <code>Person</code> its state, stored in instance variables, while the instance methods -- <code>#grow</code>, <code>#move</code>, <code>#convert</code>, etc. -- give its behavior. I used the Person class as an example because it is easy to demonstrate state and behavior with something so familiar and tangible - people do have all these states and behaviors in the real world! Now all you have to do is think of each class as a different species of object, each endowed with a set of character traits. Arrays and hashes, given the overlap in their states and behaviors, are two closely related classes. To draw another comparison to the real world, you could consider arrays and hashes as you would consider humans and chimpanzees -- very closely related, but ultimately a different species.
+<br><br><br></span>
+
+
+    <a name="10"><span id="blogTitle">Variable Scope: </span></a>
+      <span id="blogSubTitle">From Local to Global</span>
+      <span id="date">October 24, 2014</span>
+
+<span class="post">
+Ruby provides programmers with a range of variable types, all defined by their scope -- where they can be accessed. The variables, in order of increasing scope, are local variables, instance variables, class variables, constants, and global variables. Let's dive in to see the accessibility of each of the variable types. <br><br>
+
+First, let's start with local variables. As their name suggests, local variables have a local scope, limited to the method or block in which they are defined. They must start with a lower-case letter or underscore. Consider the following example:<br><br>
+
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">local_method</span>
+  <span style="color: #f8f8f2">local_variable</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&quot;I&#39;m a local variable&quot;</span>
+  <span style="color: #ae81ff">5</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">times</span> <span style="color: #66d9ef">do</span>
+    <span style="color: #f8f8f2">puts</span> <span style="color: #f8f8f2">local_variable</span>
+  <span style="color: #66d9ef">end</span>
+<span style="color: #66d9ef">end</span>
+
+<span style="color: #f8f8f2">local_method</span> <span style="color: #75715e">#=&gt;</span>
+              <span style="color: #e6db74">&quot;I&#39;m a local variable&quot;</span>
+              <span style="color: #e6db74">&quot;I&#39;m a local variable&quot;</span>
+              <span style="color: #e6db74">&quot;I&#39;m a local variable&quot;</span>
+              <span style="color: #e6db74">&quot;I&#39;m a local variable&quot;</span>
+
+<span style="color: #f8f8f2">local_variable</span> <span style="color: #f92672">=&gt;</span> <span style="color: #75715e"># NameError: undefined local variable or method `local_variable&#39;</span>
+</pre></div>
+<br>
+
+In this example, the variable <code>local_variable</code> is defined within the method. It can be accessed by the method itself, as we see it successfully executes the code block with the variable; but if we try to access it from outside the method, we get an error message that the variable is undefined. It's undefined because, as a local variable, its scope is limited to within the method itself. What if we were to define a local variable within block within a method? <br><br>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">local_method</span>
+  <span style="color: #f8f8f2">array</span> <span style="color: #f92672">=</span> <span style="color: #f92672">[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">3</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">4</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">5</span><span style="color: #f92672">]</span>
+  <span style="color: #f8f8f2">array</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">each</span> <span style="color: #66d9ef">do</span> <span style="color: #f92672">|</span><span style="color: #f8f8f2">num</span><span style="color: #f92672">|</span>
+    <span style="color: #f8f8f2">very_local_variable</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&quot;I&#39;m a VERY local variable&quot;</span>
+    <span style="color: #f8f8f2">puts</span> <span style="color: #e6db74">&quot;#{</span><span style="color: #f8f8f2">num</span><span style="color: #e6db74">}. #{</span><span style="color: #f8f8f2">very_local_variable</span><span style="color: #e6db74">}&quot;</span>
+  <span style="color: #66d9ef">end</span>
+  <span style="color: #f8f8f2">very_local_variable</span>
+<span style="color: #66d9ef">end</span>
+
+<span style="color: #f8f8f2">local_method</span> <span style="color: #75715e">#=&gt;</span>
+<span style="color: #75715e">#                 1. I&#39;m a VERY local variable</span>
+<span style="color: #75715e">#                 2. I&#39;m a VERY local variable</span>
+<span style="color: #75715e">#                 3. I&#39;m a VERY local variable</span>
+<span style="color: #75715e">#                 4. I&#39;m a VERY local variable</span>
+<span style="color: #75715e">#                 5. I&#39;m a VERY local variable</span>
+<span style="color: #75715e"># NameError: undefined local variable or method `very_local_variable&#39;</span>
+</pre></div>
+<br>
+
+What just happened? In this example, <code>very_local_variable</code> is defined within a block that is within a method. When called, the method executed the block successfully, but then when <code>very_local_variable</code> was called outside of the block in which it was defined, ruby told us it was undefined! This example shows you just how limited in scope local variables are: if defined within a block within a method, the method won't even have access to it! Now let's move on to instance variables.<br><br>
+
+Instance variables are variables limited to one particular instance of a class. They must begin with a single "@" character. To illustrate the scope of instance variables, consider the following example.<br><br>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Person</span>
+  <span style="color: #66d9ef">attr_reader</span> <span style="color: #e6db74">:first_name</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">:hair_color</span>
+
+  <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">initialize</span><span style="color: #f8f8f2">(first_name,</span> <span style="color: #f8f8f2">hair_color)</span>
+    <span style="color: #f8f8f2">@first_name</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">first_name</span>
+    <span style="color: #f8f8f2">@hair_color</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">hair_color</span>
+  <span style="color: #66d9ef">end</span>
+<span style="color: #66d9ef">end</span>
+
+<span style="color: #f8f8f2">tom</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">Person</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">new(</span><span style="color: #e6db74">&quot;Tom&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;brown&quot;</span><span style="color: #f8f8f2">)</span>
+
+<span style="color: #f8f8f2">tom</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">first_name</span> <span style="color: #75715e">#=&gt; &quot;Tom&quot;</span>
+<span style="color: #f8f8f2">tom</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">hair_color</span> <span style="color: #75715e">#=&gt; &quot;brown&quot;</span>
+
+<span style="color: #f8f8f2">muhammad</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">Person</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">new(</span><span style="color: #e6db74">&quot;Muhammad&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;black&quot;</span><span style="color: #f8f8f2">)</span>
+
+<span style="color: #f8f8f2">muhammad</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">first_name</span> <span style="color: #75715e">#=&gt; &quot;Muhammad&quot;</span>
+<span style="color: #f8f8f2">muhammad</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">hair_color</span> <span style="color: #75715e">#=&gt; &quot;black&quot;</span>
+</pre></div>
+<br>
+
+
+When we instantiate the Person class, we must give that instance a name and hair color. In the initialize method, these two parameters are turned into instance variables which can then be accessed by other methods in the class, but only on that single instance. For example, if we call <code>tom.first_name</code>, you can see that the program returns the input first name; same with the hair color. If we call these two methods on <code>muhammad</code> we see that we get different results. That is precisely because <code>@first_name</code> and <code>@hair_color</code> are instance variables, only to be used on a single instance of the class. In this case, <code>tom</code> and <code>muhammad</code> are two separate instances of the class <code>Person</code>. But Tom and Muhammad are both people, after all! What if we want them to share some characteristics? For that, we'll need class variables. <br><br>
+
+Class variables are those available to every instance of that class. What is one trait that all people have in common? Consider a similar example:<br><br>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Person</span>
+  <span style="color: #66d9ef">attr_reader</span> <span style="color: #e6db74">:first_name</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">:hair_color</span>
+
+  <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">initialize</span><span style="color: #f8f8f2">(first_name,</span> <span style="color: #f8f8f2">hair_color)</span>
+    <span style="color: #f8f8f2">@first_name</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">first_name</span>
+    <span style="color: #f8f8f2">@hair_color</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">hair_color</span>
+    <span style="color: #f8f8f2">@@species</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&quot;homo sapiens&quot;</span>
+  <span style="color: #66d9ef">end</span>
+
+  <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">species</span>
+    <span style="color: #f8f8f2">@@species</span>
+  <span style="color: #66d9ef">end</span>
+
+<span style="color: #66d9ef">end</span>
+
+<span style="color: #f8f8f2">tom</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">Person</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">new(</span><span style="color: #e6db74">&quot;Tom&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;brown&quot;</span><span style="color: #f8f8f2">)</span>
+
+<span style="color: #f8f8f2">tom</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">first_name</span> <span style="color: #75715e">#=&gt; &quot;Tom&quot;</span>
+<span style="color: #f8f8f2">tom</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">hair_color</span> <span style="color: #75715e">#=&gt; &quot;brown&quot;</span>
+<span style="color: #f8f8f2">tom</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">species</span> <span style="color: #75715e">#=&gt; &quot;homo sapiens&quot;</span>
+
+<span style="color: #f8f8f2">muhammad</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">Person</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">new(</span><span style="color: #e6db74">&quot;Muhammad&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;black&quot;</span><span style="color: #f8f8f2">)</span>
+
+<span style="color: #f8f8f2">muhammad</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">first_name</span> <span style="color: #75715e">#=&gt; &quot;Muhammad&quot;</span>
+<span style="color: #f8f8f2">muhammad</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">hair_color</span> <span style="color: #75715e">#=&gt; &quot;black&quot;</span>
+<span style="color: #f8f8f2">muhammad</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">species</span> <span style="color: #75715e">#=&gt; &quot;homo sapiens&quot;</span>
+</pre></div>
+<br>
+
+As you can see, the <code>@@species</code> variable is not only available to Tom, but also to Muhammad, and every other instance of <code>Person</code>!<br><br>
+
+Now let's move on to constants and global variables. These two are similar in scope, but let's start with constants. Constants must be all-caps and, traditionally, are not to be changed. Technically, Ruby does allow the user to change them, but that runs counter to their whole point of being constant, unchanging variables. Like local variables, their scope is slightly fluid. If they are defined within a class, they are available anywhere in the context of that class. If they are defined outside a class, they have global scope, which means they are accessible from anywhere. To demonstrate these concepts, let's return again to our first example:<br><br>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">local_method</span>
+  <span style="color: #f8f8f2">local_variable</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&quot;I&#39;m a local variable&quot;</span>
+  <span style="color: #ae81ff">5</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">times</span> <span style="color: #66d9ef">do</span>
+    <span style="color: #f8f8f2">puts</span> <span style="color: #f8f8f2">local_variable</span>
+  <span style="color: #66d9ef">end</span>
+<span style="color: #66d9ef">end</span>
+
+<span style="color: #f8f8f2">local_method</span> <span style="color: #75715e">#=&gt;</span>
+              <span style="color: #75715e"># &quot;I&#39;m a local variable&quot;</span>
+              <span style="color: #75715e"># &quot;I&#39;m a local variable&quot;</span>
+              <span style="color: #75715e"># &quot;I&#39;m a local variable&quot;</span>
+              <span style="color: #75715e"># &quot;I&#39;m a local variable&quot;</span>
+
+<span style="color: #f8f8f2">local_variable</span> <span style="color: #f92672">=&gt;</span> <span style="color: #75715e"># NameError: undefined local variable or method `local_variable&#39;</span>
+</pre></div>
+<br>
+
+What if we turned <code>local_variable</code> into a CONSTANT? We aren't allowed to define CONSTANTS within methods, because technically every time we run the method we'd be re-assigning the constant (even though to the same string value, it would still have a different object ID every time, which isn't allowed), so let's define it outside the method.<br><br>
+
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">CONSTANT_VARIABLE</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&quot;I am a CONSTANT variable&quot;</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">local_method</span>
+  <span style="color: #ae81ff">5</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">times</span> <span style="color: #66d9ef">do</span>
+    <span style="color: #f8f8f2">puts</span> <span style="color: #66d9ef">CONSTANT_VARIABLE</span>
+  <span style="color: #66d9ef">end</span>
+<span style="color: #66d9ef">end</span>
+
+<span style="color: #f8f8f2">local_method</span> <span style="color: #75715e">#=&gt;</span>
+              <span style="color: #75715e"># &quot;I&#39;m a CONSTANT variable&quot;</span>
+              <span style="color: #75715e"># &quot;I&#39;m a CONSTANT variable&quot;</span>
+              <span style="color: #75715e"># &quot;I&#39;m a CONSTANT variable&quot;</span>
+              <span style="color: #75715e"># &quot;I&#39;m a CONSTANT variable&quot;</span>
+              <span style="color: #75715e"># &quot;I&#39;m a CONSTANT variable&quot;</span>
+</pre></div>
+
+<br>
+
+
+Look! the method has access to the constant even though it's defined outside of the method! The same goes for global variables, except they actually can be defined within methods:<br><br>
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">local_method</span>
+  <span style="color: #f8f8f2">array</span> <span style="color: #f92672">=</span> <span style="color: #f92672">[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">2</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">3</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">4</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">5</span><span style="color: #f92672">]</span>
+  <span style="color: #f8f8f2">array</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">each</span> <span style="color: #66d9ef">do</span> <span style="color: #f92672">|</span><span style="color: #f8f8f2">num</span><span style="color: #f92672">|</span>
+    <span style="color: #f8f8f2">$global_variable</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&quot;I&#39;m a global variable!&quot;</span>
+    <span style="color: #f8f8f2">puts</span> <span style="color: #e6db74">&quot;#{</span><span style="color: #f8f8f2">num</span><span style="color: #e6db74">}. #{</span><span style="color: #f8f8f2">$global_variable</span><span style="color: #e6db74">}&quot;</span>
+  <span style="color: #66d9ef">end</span>
+  <span style="color: #f8f8f2">$global_variable</span>
+<span style="color: #66d9ef">end</span>
+
+<span style="color: #f8f8f2">local_method</span> <span style="color: #75715e">#=&gt;</span>
+                <span style="color: #75715e"># 1. I&#39;m a global variable!</span>
+                <span style="color: #75715e"># 2. I&#39;m a global variable!</span>
+                <span style="color: #75715e"># 3. I&#39;m a global variable!</span>
+                <span style="color: #75715e"># 4. I&#39;m a global variable!</span>
+                <span style="color: #75715e"># 5. I&#39;m a global variable!</span>
+                <span style="color: #75715e"># &quot;I&#39;m a global variable!&quot;</span>
+
+
+<span style="color: #f8f8f2">$global_variable</span> <span style="color: #75715e">#=&gt; &quot;I&#39;m a global variable!&quot;</span>
+</pre></div>
+<br>
+
+In this example, <code>$global_variable</code> is accessible in the block in which it's defined, in the method itself (this is where a local variable would start giving us problems), and outside the block and method entirely!<br><br>
+
+I hope you found this little explanation useful; I'm off to learn more so I can write more next time! Thanks for reading! :)
+<br>
 <br></span>
     </div>
 
