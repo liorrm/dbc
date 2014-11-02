@@ -6,20 +6,28 @@ var endOfRunway = document.getElementById("endOfRunway");
 var boeingImg   = document.getElementById("boeingImg");
 
 var boeingData = {
-  name: "Boeing 747-400",
   fuelLevel: 100,
-  parked: false,
+  parked: false
 }
 
 var airbusData = {
   fuelLevel: 100,
-  name: "Airbus A320",
   inWay: false
 }
 
+var parkedMessage = "You have parked at the gate! You have a new batch of passengers and are ready to take off. Go back to the beginning of the runway to take off!"
+
+var takeOffMessage = "Rotate...TAKEOFF! Landing gear up... climb and maintain level 12-0! Congratulations! You successfully navigated the airport and took off! Now turn autopilot on, sit back, relax, and enjoy the flight to Frankfurt, Germany!"
+
+var naughtyPilotMessage = "What are you doing! You need to unload first! Go back to the gate!"
+
+var scoundrelMessage = "Yikes, looks like an Airbus A320 is on the runway. Click that little ugly scoundrel to alert him to clear the way!"
+
+var fuelMessage = "Oh no, you don't have enough fuel to safely complete the flight! Next time, make your moves wisely! Refresh the page to try again!"
+
 var park = function(newLeftValue, newTopValue) {
   if ((newLeftValue >= 300 && newLeftValue < 600) && (newTopValue <= 130 && newTopValue > 30)) {
-    alert("You have parked at the gate! You have a new batch of passengers and are ready to take off. Go back to the beginning of the runway to take off!");
+    alert(parkedMessage);
     boeingData.parked = true
     airbusData.inWay = true
     airbus.style.top = "320px";
@@ -29,22 +37,19 @@ var park = function(newLeftValue, newTopValue) {
 var move = function(e) {
   if (boeingData.fuelLevel > 0 && (e.keyCode === 39) && (parseInt(window.getComputedStyle(boeing).top)) > 300 && (parseInt(window.getComputedStyle(boeing).top)) <= 400 && (parseInt(window.getComputedStyle(boeing).left)) > 850 && boeingData.parked === true && airbusData.inWay === false) {
 
-    alert("Rotate...TAKEOFF! Landing gear up... climb and maintain level 12-0! Congratulations! You successfully navigated the airport and took off! Now turn autopilot on, sit back, relax, and enjoy the flight to Frankfurt, Germany!");
-    boeingImg.src = "img/747shadow.jpg";
-    boeingData.fuelLevel = 0
+    alert(takeOffMessage);
+    boeingData.fuelLevel = 0;
     playVideo();
   }
 
   else if (boeingData.fuelLevel > 0 && (e.keyCode === 39 || e.keyCode === 40) && (parseInt(window.getComputedStyle(boeing).top)) > 300 && (parseInt(window.getComputedStyle(boeing).top)) <= 400 && (parseInt(window.getComputedStyle(boeing).left)) > 330 && boeingData.parked === false) {
 
-    alert("What are you doing! You need to unload first! Go back to the gate!");
-
+    alert(naughtyPilotMessage);
   }
   else if (boeingData.fuelLevel > 0 && (e.keyCode === 39 || e.keyCode === 40) && (parseInt(window.getComputedStyle(boeing).top)) > 300 && (parseInt(window.getComputedStyle(boeing).top)) <= 400 && (parseInt(window.getComputedStyle(boeing).left)) > 160 && airbusData.inWay === true) {
 
-    alert("Yikes, looks like an Airbus A320 is on the runway. Click that little ugly scoundrel to alert him to clear the way!");
-
-}
+    alert(scoundrelMessage);
+  }
   else if (boeingData.fuelLevel > 0) {
     var increment = 50
     var oldTopValue  = parseInt(window.getComputedStyle(boeing).top);
@@ -86,9 +91,8 @@ var move = function(e) {
     boeingData.fuelLevel -= 2
   }
   else if (boeingData.fuelLevel === 0 && e.keyCode === 37 || e.keyCode === 38 || e.keyCode === 39 || e.keyCode === 40) {
-    alert("Oh no, you don't have enough fuel to safely complete the flight! Next time, make your moves wisely! Refresh the page to try again!");
+    alert(fuelMessage);
   }
-
 }
 
 var clearWay = function(e) {

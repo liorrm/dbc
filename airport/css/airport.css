@@ -51,10 +51,3 @@ p {
   left: 860px;
   top: 220px;
 }
-
-#endOfRunway {
-  position: absolute;
-  top: 320px;
-  left: 1200px;
-  background-color: rgba(200, 100, 100);
-}
