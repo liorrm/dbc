@@ -1,0 +1,60 @@
+body {
+  margin: 0
+}
+
+#container {
+  background-color: rgb(150,150,150);
+}
+
+#header {
+  font-family: "Garamond";
+  text-align: center;
+  font-size: 30px;
+  padding: 10px;
+}
+
+#game {
+  position: relative;
+  height: 500px;
+  width: 1200px;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: rgb(100, 100, 100);
+}
+
+p {
+  font-family: "Garamond";
+  top: 10px;
+  left: 850px;
+  position: absolute;
+}
+
+#runway {
+  position: absolute;
+  top: 300px;
+}
+
+#boeing {
+  position: absolute;
+  top: 305px;
+  left: 30px;
+}
+
+#terminal {
+  position: absolute;
+  top: 20px;
+  left: 500px;
+}
+
+#airbus {
+  position: absolute;
+  left: 860px;
+  top: 220px;
+}
+
+#endOfRunway {
+  position: absolute;
+  top: 320px;
+  left: 1200px;
+  background-color: rgba(200, 100, 100);
+}
