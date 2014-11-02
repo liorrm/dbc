@@ -127,6 +127,8 @@ local_method #=>
               "I'm a CONSTANT variable"
               "I'm a CONSTANT variable"
               "I'm a CONSTANT variable"
+              "I'm a CONSTANT variable"
+
 
 
 Look! the method has access to the constant even though it's defined outside of the method! The same goes for global variables, except they actually can be defined within methods:
@@ -141,12 +143,20 @@ def local_method
 end
 
 local_method #=>
-                1. I'm a global variable
-                2. I'm a global variable
-                3. I'm a global variable
-                4. I'm a global variable
-                5. I'm a global variable
-NameError: undefined local variable or method `very_local_variable'
+                1. I'm a global variable!
+                2. I'm a global variable!
+                3. I'm a global variable!
+                4. I'm a global variable!
+                5. I'm a global variable!
+                "I'm a global variable"
+
+
+$global_variable #=> "I'm a global variable!"
+
+In this example, <code>$global_variable</code> is accessible anywhere, even though it was defined within a block within a method! Global variables are very powerful!
+
+I hope you found this little explanation useful; I'm off to learn more so I can write more next time! Thanks :)
+
 
 
 

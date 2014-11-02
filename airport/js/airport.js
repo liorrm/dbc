@@ -26,7 +26,6 @@ var park = function(newLeftValue, newTopValue) {
   }
 }
 
-
 var move = function(e) {
   if (boeingData.fuelLevel > 0 && (e.keyCode === 39) && (parseInt(window.getComputedStyle(boeing).top)) > 300 && (parseInt(window.getComputedStyle(boeing).top)) <= 400 && (parseInt(window.getComputedStyle(boeing).left)) > 850 && boeingData.parked === true && airbusData.inWay === false) {
 
@@ -101,5 +100,15 @@ var crash = function(object) {
   object.crashed = true
 }
 
+var playVideo = function() {
+  document.getElementById("container").innerHTML = "
+    <video width="320" height="240" controls>
+      <source src="movie.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  "
+}
+
 airbus.addEventListener('click', clearWay)
 window.addEventListener('keydown', move)
+
