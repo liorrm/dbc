@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ruby Enumerables Cheat Sheet</title>
+    <link rel="stylesheet" type="text/css" href="cheatsheet.css
+    ">
+  </head>
+  <body>
+    <div id="header">Airplane-themed Ruby Enumerable Cheatsheet</div>
+    <div id="links">
+      <ul>
+        <li>#each_with_index</li>
+        <li>#inject</li>
+        <li>#map</li>
+        <li>#include?</li>
+        <li>#sort</li>
+      </ul>
+    </div>
+    <div id="examples">
+      <ul>
+        <li>#each_with_index:
+         <div class="highlight" style="background: #272822"><pre style="line-height: 125%">  <span style="color: #f8f8f2">airplanes</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">Hash</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">new</span>
+         <span style="color: #e6db74">%w(boeing airbus canadair embraer)</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">each_with_index</span> <span style="color: #f8f8f2">{</span> <span style="color: #f92672">|</span><span style="color: #f8f8f2">item,</span> <span style="color: #f8f8f2">index</span><span style="color: #f92672">|</span>
+         <span style="color: #f8f8f2">hash</span><span style="color: #f92672">[</span><span style="color: #f8f8f2">item</span><span style="color: #f92672">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">index</span>
+         <span style="color: #f8f8f2">}</span>
+         <span style="color: #f8f8f2">hash</span>   <span style="color: #75715e">#=&gt; {&quot;boeing&quot;=&gt;0, &quot;airbus&quot;=&gt;1, &quot;canadair&quot;=&gt;2, &quot;embraer&quot;=&gt;0 }</span>
+         </pre></div>
+         <p>This examples uses the #each_with_index method to fill a hash with the contents and their respective indices as key-value pairs</p>
+        </li>
+        <li>#inject:
+          <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f8f8f2">airplanes</span> <span style="color: #f92672">=</span> <span style="color: #f92672">[</span><span style="color: #ae81ff">777</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">320</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">380</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">767</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">747</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">340</span><span style="color: #f92672">]</span>
+
+          <span style="color: #f8f8f2">airplanes</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">inject(</span><span style="color: #e6db74">:+</span><span style="color: #f8f8f2">)</span> <span style="color: #75715e">#=&gt; 3331</span>
+
+          <span style="color: #f8f8f2">airplanes</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">inject(</span><span style="color: #e6db74">:*</span><span style="color: #f8f8f2">)</span> <span style="color: #75715e"># =&gt; 18405578685312000</span>
+
+          <span style="color: #f8f8f2">airplanes</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">inject(</span><span style="color: #e6db74">:-</span><span style="color: #f8f8f2">)</span> <span style="color: #75715e"># =&gt; -1777</span>
+          </pre></div> The #inject method is an accumulator; in this example, it reduces the elements of an array to a single element based on the block we pass. When we pass the :+ symbol, it will accumulate the elements by adding them; when we pass the :-, it subtracts them, etc.
+        </li>
+        <li>#map:
+          <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f8f8f2">airplanes</span> <span style="color: #f92672">=</span> <span style="color: #f92672">[</span><span style="color: #ae81ff">777</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">320</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">380</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">767</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">747</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">340</span><span style="color: #f92672">]</span>
+
+          <span style="color: #f8f8f2">airplanes</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">map</span> <span style="color: #66d9ef">do</span> <span style="color: #f92672">|</span><span style="color: #f8f8f2">element</span><span style="color: #f92672">|</span>
+          <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">element</span> <span style="color: #f92672">&lt;</span> <span style="color: #ae81ff">400</span>
+          <span style="color: #e6db74">&quot;A&quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">element</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">to_s</span>
+          <span style="color: #66d9ef">elsif</span> <span style="color: #f8f8f2">element</span> <span style="color: #f92672">&gt;</span> <span style="color: #ae81ff">700</span>
+          <span style="color: #e6db74">&quot;B&quot;</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">element</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">to_s</span>
+          <span style="color: #66d9ef">end</span>
+          <span style="color: #66d9ef">end</span>
+
+          <span style="color: #75715e">#=&gt; [&quot;B777&quot;, &quot;A320&quot;, &quot;A380&quot;, &quot;B767&quot;, &quot;B747&quot;, &quot;A340&quot;]</span>
+          </pre></div>The #map method executes a block on each element of an array and returns a copy of the array with the modified elements. In this example, we add an A or B to the element, depending on its value.
+        </li>
+        <li>#include?:
+          <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f8f8f2">bad_airplanes</span> <span style="color: #f92672">=</span> <span style="color: #f92672">[</span><span style="color: #e6db74">&quot;any_russian_or_ukranian_airplane&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;Boeing 787&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;Airbus A310&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;Boeing 747SP,&quot;</span> <span style="color: #e6db74">&quot;Airbus A340-200&quot;</span><span style="color: #f92672">]</span>
+
+
+           <span style="color: #f8f8f2">bad_airplanes</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">include?(</span><span style="color: #e6db74">&quot;Airbus A340-200&quot;</span><span style="color: #f8f8f2">)</span> <span style="color: #75715e">#=&gt; true</span>
+          <span style="color: #f8f8f2">bad_airplanes</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">include?(</span><span style="color: #e6db74">&quot;Boeing 747-400&quot;</span><span style="color: #f8f8f2">)</span> <span style="color: #75715e">#=&gt; false</span>
+          </pre></div> The #include method iterates over an array or hash and checks whether the data structure contains the passed argument. In this example, the array contains the string "Airbus A340-200", so the #include method returns true when "Airbus A340-200" is passed as an argument. But the array does not contain "Boeing 747-400", so when it is passed, the #include method will return false.
+        </li>
+      </ul>
+    </div>
+    <div id="footer"></div>
+  </body>
+  </html>
+
+
