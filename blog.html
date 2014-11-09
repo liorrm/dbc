@@ -27,7 +27,9 @@
         <li><a href="#10">Variable Scope</a></li>
         <li><a href="#11">Stereotype Threat</a></li>
         <li><a href="#12">Ruby v. JS</a></li>
-        <li><a href="#13">Values</a>
+        <li><a href="#13">Values</a></li>
+        <li><a href="#14">Calm b4 The Storm</a></li>
+        <li><a href="#15">Event Listeners</a></li>
       </ul>
     </div>
     <div id="content">
@@ -511,8 +513,34 @@ Wisdom: 4 <br>
 
 These are all important values in my life. The one whose importance is easy to explain is economic security, as I have not been economically stable for many years of my life and really feel its absence. I am not concerned with being wealthy, but with being able to support myself and help my family, which ties into other values such as self-reliance, stability, tranquility, money, etc. <br><br>
 
-How do I feel when I think about my values? I feel excited, reminded of what I have to live for, what I'm doing with myself. I feel motivated and remember all the things I want to do, the difference I want to make. I think these values hold the key for me to keep up my morale at DBC and to mediate stereotype threat. If I just stop for a moment and think about the big picture, I feel like I can restore my morale.<br></span>
-  </div>
+How do I feel when I think about my values? I feel excited, reminded of what I have to live for, what I'm doing with myself. I feel motivated and remember all the things I want to do, the difference I want to make. I think these values hold the key for me to keep up my morale at DBC and to mediate stereotype threat. If I just stop for a moment and think about the big picture, I feel like I can restore my morale.<br><br><br></span>
+
+  <a name="14"><span id="blogTitle">Calm Before the Storm: </span></a>
+      <span id="blogSubTitle">Phase 0 Reflections</span>
+      <span id="date">November 7, 2014</span>
+
+<span class="post">Here are some reflections as I finish up my penultimate week of Phase 0. This is going to be more of a Joycean, stream-of-consciousness thing rather than something with even a modicum of structure, just to warn whoever might be reading this. First of all, oh man - I can't believe how quickly these weeks have been passing. I think there must be a magic recipe to have time fly: just enough work and mental stimulation to keep you busy and thinking on your feet, but not enough to stress you out or overwhelm you. That is exactly what Phase 0 has been. I was challenged just enough so that I didn't feel bored, but not too much as to resemble the stereotyped, never-ending 9-5 work week that Americans hate but do anyway. I realize the intensive phases will not be as leisurely and balanced as Phase 0 has been, but honestly I'm ready for a challenge. Staying at home 5 days a week, while perfectly pleasant, is not the most stimulating environment. Let's just say 9 weeks of Phase 0 is a good amount. Anything greater and I'd start to get a little stir crazy.<br><br>
+
+Now, as for material: it's pretty neat to see my progress, even though it's not that obvious. My mind is just far more used to thinking like a programmer, and my familiarity with Ruby especially makes it so that I have many tools in my arsenal to tackle almost any logic challenge. JavaScript has been a bit of a struggle, though I am determined to overcome my aversion to it, since it seems significantly more important in the overall software development world than Ruby (client-side && server-side, whereas Ruby is just server-side). This is especially true with maps and mapping software, as much of the functionality is done on the server-side... and because I am obsessed with maps, I will need to become obsessed with JS! Hmm, what else? I think after doing a fair amount of both front-end and back-end, I can say that I prefer to technical challenge of back-end stuff, though I like that, in the snap of a finger, you can <em>see</em> front-end changes. An ideal place for me, perhaps, would be the back-end of the front-end, if such a place exists. I want to work on things that have visual components, but I don't want to just be tinkering around with changing font-sizes, padding, and margin. <br><br>
+
+So, here I am, 9 days away from Phase 1. I look forward to delving into Ruby for the first few weeks. I am keeping in mind the cultural components of DBC and remembering that this is a kitchen and we are all cooks. I can't expect anything to be served to me; I expect to create and co-create and have full autonomy over what I do. I want to check in with myself every once in a while to make sure I am sticking to my goals. As I am 20 years old and without a college degree, I have so many doubts and insecurities that I will continue to try to whisk away to the best of my ability. Who would hire me? But I need to keep the faith that the status quo is changing and that, at least in the tech world, a B.A. doesn't mean nearly as much as an impressive technical interview or even a single cool code project. I think being in the DBC environment will really help me gain confidence, insha'Allah.<br><br><br>
+</span>
+     <a name="15"><span id="blogTitle">Event Listeners: </span></a>
+      <span id="blogSubTitle">The Critical Link</span>
+      <span id="date">November 8, 2014</span>
+
+<span class="post">JavaScript event listeners are kind of like the nervous system of a website. Without them, the website does not have the ability to sense, or "listen to", actions the user can take (such as clicking, pressing keys, loading the page, etc). I first learned event listeners through programming my first JS project, the <a href="blog.liorrmorrison.com/dbc/airport">airporter game</a>. Event listeners allow you to change or manipulate HTML/CSS elements when a certain element "hears" an event. To illustrate this idea, let's take an example from my airport game. It would help you understand this explanation if you played a quick round of the game first! In the game, I have two event listeners, one that targets the entire window and one that targets an HTML element.
+
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #a6e22e">airbus</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">addEventListener</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;click&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">clearWay</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">window.</span><span style="color: #a6e22e">addEventListener</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;keydown&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">move</span><span style="color: #f8f8f2">)</span>
+</pre></div>
+
+
+
+Let's analyze the syntax of these event listeners. The functionality of the <code>addEventListener</code> function is obvious enough, but what's going on with the rest of it? You call the <code>addEventListener</code> function on an HTML/DOM element. In the first example, it is being called on <code>airbus</code>, which is an a div in the HTML with the id "airbus". If you have played the game, the airbus is the "little scoundrel" airplane that gets in the way of your progress! Now, what's going on in the parenthesis? The <code>addEventListener</code> function takes two parameters: an event, and a function to run when that event occurs (there is an optional boolean third parameter, but it is pretty technical so I won't discuss it here). In the first example, the event is 'click', and the function is clearWay. So when the airbus element is clicked, the clearWay function will be run. I defined the clearWay function such that it changes the element's top style to 200px from where it originally was lower down on the runway. How does this manifest? Well, if you click the airbus on the page, it moves up away from the runway! As for the second example, why do we target the window if we really mean to move the other airplane? Well, the 'keydown' event can't really target a particular HTML DOM element. The only part of a web page that can "hear" it is the window itself! That allows you to use the arrow keys to control the airplane without having to click, scroll over, or do anything to the airplane itself. As you can see, the second event listener executes the "move" function upon the 'keydown' event (which, in the move function, I limit to just the arrow keys). The <code>move</code> function changes the boeing element's CSS positioning. Event listeners are the link between JavaScript and HTML/CSS elements. Without them, no script would be able communicate with and manipulate the web page!<br>
+</span>
+
+</div>
     <div id="footer">
       Liorr Yehuda Morrison &copy;2014, All Rights Reserved
       <span id="sitemap">
